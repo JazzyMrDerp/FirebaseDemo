@@ -23,6 +23,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class PrimaryController {
+    public TextField phoneTextField;
     @FXML
     private TextField ageTextField;
 
@@ -145,11 +146,12 @@ public class PrimaryController {
 
     public void addData() {
 
-        DocumentReference docRef = DemoApp.fstore.collection("Persons").document(UUID.randomUUID().toString());
-
+        DocumentReference docRef = DemoApp.fstore.collection("Persons")
+                .document(UUID.randomUUID().toString());
         Map<String, Object> data = new HashMap<>();
         data.put("Name", nameTextField.getText());
         data.put("Age", Integer.parseInt(ageTextField.getText()));
+        data.put("Phone", phoneTextField.getText());
 
         //asynchronously write data
         ApiFuture<WriteResult> result = docRef.set(data);
